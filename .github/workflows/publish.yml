@@ -1,0 +1,90 @@
+name: Publish to PyPI
+on:
+  push:
+    branches: [main]
+    paths: [pyproject.toml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pypi-publication
+  cancel-in-progress: false
+
+jobs:
+  eligibility:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    outputs:
+      needed: ${{ steps.version.outputs.needed }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - name: Check whether this version needs publication
+        id: version
+        shell: python
+        run: |
+          import os
+          import tomllib
+          from urllib.error import HTTPError
+          from urllib.parse import quote
+          from urllib.request import urlopen
+
+          with open("pyproject.toml", "rb") as source:
+              project = tomllib.load(source)["project"]
+          name, version = project["name"], project["version"]
+          url = f"https://pypi.org/pypi/{quote(name, safe='')}/{quote(version, safe='')}/json"
+          try:
+              with urlopen(url, timeout=30) as response:
+                  if response.status != 200:
+                      raise RuntimeError(f"Unexpected PyPI response: {response.status}")
+              needed = "false"
+              print(f"::notice::{name} {version} is already published; skipping upload")
+          except HTTPError as error:
+              if error.code != 404:
+                  raise
+              needed = "true"
+              print(f"{name} {version} is not published; proceeding through CI")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as output:
+              print(f"needed={needed}", file=output)
+
+  validate:
+    needs: eligibility
+    if: needs.eligibility.outputs.needed == 'true'
+    uses: ./.github/workflows/ci.yml
+
+  build:
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - run: python -m pip install -r requirements-dev.txt 'twine>=6,<7'
+      - run: python -m build
+      - run: python -m twine check --strict dist/*
+      - uses: actions/upload-artifact@v4
+        with:
+          name: python-distributions
+          path: dist/*
+          if-no-files-found: error
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/project/berylx-py/
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: python-distributions
+          path: dist/
+      - name: Publish distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@7245906fb61fa33a13554f9d5fb856fe61758086 # release/v1

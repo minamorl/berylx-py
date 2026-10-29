@@ -1,0 +1,258 @@
+$ .venv/bin/python -m pytest -q tests/test_regression.py tests/test_darkcore.py tests/test_oracle.py tests/test_boundaries.py tests/test_timeline.py
+exit: 0
+........................................................................ [100%]
+72 passed in 0.30s
+
+$ .venv/bin/python -m pytest -q tests/test_properties.py
+exit: 0
+................                                                         [100%]
+16 passed in 1.42s
+
+$ .venv/bin/ruff check src tests scripts
+exit: 0
+All checks passed!
+
+$ .venv/bin/ruff format --check src tests scripts
+exit: 0
+18 files already formatted
+
+$ .venv/bin/mypy src/berylx
+exit: 0
+Success: no issues found in 11 source files
+
+$ npx --yes prettier@3.6.2 --check README.md docs/**/*.md .github/**/*.yml tests/fixtures/*.json
+exit: 0
+Checking formatting...
+All matched files use Prettier code style!
+
+$ .venv/bin/python -m build
+exit: 0
+* Creating isolated environment: venv+pip...
+* Installing packages in isolated environment:
+  - setuptools>=77
+* Getting build dependencies for sdist...
+running egg_info
+writing src/berylx_py.egg-info/PKG-INFO
+writing dependency_links to src/berylx_py.egg-info/dependency_links.txt
+writing requirements to src/berylx_py.egg-info/requires.txt
+writing top-level names to src/berylx_py.egg-info/top_level.txt
+reading manifest file 'src/berylx_py.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+adding license file 'LICENSE'
+writing manifest file 'src/berylx_py.egg-info/SOURCES.txt'
+* Installed build dependency versions:
+  - setuptools==84.2.1
+* Building sdist...
+running sdist
+running egg_info
+writing src/berylx_py.egg-info/PKG-INFO
+writing dependency_links to src/berylx_py.egg-info/dependency_links.txt
+writing requirements to src/berylx_py.egg-info/requires.txt
+writing top-level names to src/berylx_py.egg-info/top_level.txt
+reading manifest file 'src/berylx_py.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+adding license file 'LICENSE'
+writing manifest file 'src/berylx_py.egg-info/SOURCES.txt'
+running check
+creating berylx_py-0.1.0
+creating berylx_py-0.1.0/.github/workflows
+creating berylx_py-0.1.0/docs
+creating berylx_py-0.1.0/docs/spec
+creating berylx_py-0.1.0/evidence
+creating berylx_py-0.1.0/scripts
+creating berylx_py-0.1.0/src/berylx
+creating berylx_py-0.1.0/src/berylx/darkcore
+creating berylx_py-0.1.0/src/berylx_py.egg-info
+creating berylx_py-0.1.0/tests
+creating berylx_py-0.1.0/tests/fixtures
+copying files to berylx_py-0.1.0...
+copying LICENSE -> berylx_py-0.1.0
+copying MANIFEST.in -> berylx_py-0.1.0
+copying README.md -> berylx_py-0.1.0
+copying pyproject.toml -> berylx_py-0.1.0
+copying requirements-dev.txt -> berylx_py-0.1.0
+copying .github/workflows/ci.yml -> berylx_py-0.1.0/.github/workflows
+copying .github/workflows/publish.yml -> berylx_py-0.1.0/.github/workflows
+copying docs/api.md -> berylx_py-0.1.0/docs
+copying docs/equivalence.md -> berylx_py-0.1.0/docs
+copying docs/host-and-delivery.md -> berylx_py-0.1.0/docs
+copying docs/source-audit.md -> berylx_py-0.1.0/docs
+copying docs/timeline.md -> berylx_py-0.1.0/docs
+copying docs/spec/berylx-py.spec -> berylx_py-0.1.0/docs/spec
+copying evidence/build.txt -> berylx_py-0.1.0/evidence
+copying evidence/delivery.txt -> berylx_py-0.1.0/evidence
+copying evidence/final-gates.txt -> berylx_py-0.1.0/evidence
+copying evidence/frozen-sha256.txt -> berylx_py-0.1.0/evidence
+copying evidence/independent-final.txt -> berylx_py-0.1.0/evidence
+copying evidence/p2-oracle.txt -> berylx_py-0.1.0/evidence
+copying evidence/p2-red.txt -> berylx_py-0.1.0/evidence
+copying evidence/p3-core.txt -> berylx_py-0.1.0/evidence
+copying evidence/p3-integrated.txt -> berylx_py-0.1.0/evidence
+copying evidence/p4-property.txt -> berylx_py-0.1.0/evidence
+copying evidence/pypi-preflight.txt -> berylx_py-0.1.0/evidence
+copying evidence/python-matrix.txt -> berylx_py-0.1.0/evidence
+copying evidence/rebuild-final-docs.txt -> berylx_py-0.1.0/evidence
+copying evidence/review-cray-red.txt -> berylx_py-0.1.0/evidence
+copying evidence/review-red.txt -> berylx_py-0.1.0/evidence
+copying evidence/spec-sat.txt -> berylx_py-0.1.0/evidence
+copying evidence/upstream.txt -> berylx_py-0.1.0/evidence
+copying evidence/wheel-install.txt -> berylx_py-0.1.0/evidence
+copying evidence/wheel-smoke.txt -> berylx_py-0.1.0/evidence
+copying scripts/check_readme.py -> berylx_py-0.1.0/scripts
+copying scripts/ts_oracle.mjs -> berylx_py-0.1.0/scripts
+copying src/berylx/__init__.py -> berylx_py-0.1.0/src/berylx
+copying src/berylx/adapters.py -> berylx_py-0.1.0/src/berylx
+copying src/berylx/core.py -> berylx_py-0.1.0/src/berylx
+copying src/berylx/effect_tree.py -> berylx_py-0.1.0/src/berylx
+copying src/berylx/graph.py -> berylx_py-0.1.0/src/berylx
+copying src/berylx/merge.py -> berylx_py-0.1.0/src/berylx
+copying src/berylx/nodes.py -> berylx_py-0.1.0/src/berylx
+copying src/berylx/timeline.py -> berylx_py-0.1.0/src/berylx
+copying src/berylx/timeline_berylx.py -> berylx_py-0.1.0/src/berylx
+copying src/berylx/darkcore/__init__.py -> berylx_py-0.1.0/src/berylx/darkcore
+copying src/berylx/darkcore/io.py -> berylx_py-0.1.0/src/berylx/darkcore
+copying src/berylx_py.egg-info/PKG-INFO -> berylx_py-0.1.0/src/berylx_py.egg-info
+copying src/berylx_py.egg-info/SOURCES.txt -> berylx_py-0.1.0/src/berylx_py.egg-info
+copying src/berylx_py.egg-info/dependency_links.txt -> berylx_py-0.1.0/src/berylx_py.egg-info
+copying src/berylx_py.egg-info/requires.txt -> berylx_py-0.1.0/src/berylx_py.egg-info
+copying src/berylx_py.egg-info/top_level.txt -> berylx_py-0.1.0/src/berylx_py.egg-info
+copying tests/test_boundaries.py -> berylx_py-0.1.0/tests
+copying tests/test_darkcore.py -> berylx_py-0.1.0/tests
+copying tests/test_oracle.py -> berylx_py-0.1.0/tests
+copying tests/test_properties.py -> berylx_py-0.1.0/tests
+copying tests/test_regression.py -> berylx_py-0.1.0/tests
+copying tests/test_timeline.py -> berylx_py-0.1.0/tests
+copying tests/fixtures/ts-observations.json -> berylx_py-0.1.0/tests/fixtures
+Writing berylx_py-0.1.0/setup.cfg
+Creating tar archive
+removing 'berylx_py-0.1.0' (and everything under it)
+* Building wheel from sdist
+* Creating isolated environment: venv+pip...
+* Installing packages in isolated environment:
+  - setuptools>=77
+* Getting build dependencies for wheel...
+running egg_info
+writing src/berylx_py.egg-info/PKG-INFO
+writing dependency_links to src/berylx_py.egg-info/dependency_links.txt
+writing requirements to src/berylx_py.egg-info/requires.txt
+writing top-level names to src/berylx_py.egg-info/top_level.txt
+reading manifest file 'src/berylx_py.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+adding license file 'LICENSE'
+writing manifest file 'src/berylx_py.egg-info/SOURCES.txt'
+* Installed build dependency versions:
+  - setuptools==84.2.1
+* Building wheel...
+running bdist_wheel
+running build
+running build_py
+creating build/lib/berylx
+copying src/berylx/timeline_berylx.py -> build/lib/berylx
+copying src/berylx/timeline.py -> build/lib/berylx
+copying src/berylx/nodes.py -> build/lib/berylx
+copying src/berylx/merge.py -> build/lib/berylx
+copying src/berylx/graph.py -> build/lib/berylx
+copying src/berylx/effect_tree.py -> build/lib/berylx
+copying src/berylx/core.py -> build/lib/berylx
+copying src/berylx/adapters.py -> build/lib/berylx
+copying src/berylx/__init__.py -> build/lib/berylx
+creating build/lib/berylx/darkcore
+copying src/berylx/darkcore/io.py -> build/lib/berylx/darkcore
+copying src/berylx/darkcore/__init__.py -> build/lib/berylx/darkcore
+running egg_info
+writing src/berylx_py.egg-info/PKG-INFO
+writing dependency_links to src/berylx_py.egg-info/dependency_links.txt
+writing requirements to src/berylx_py.egg-info/requires.txt
+writing top-level names to src/berylx_py.egg-info/top_level.txt
+reading manifest file 'src/berylx_py.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+adding license file 'LICENSE'
+writing manifest file 'src/berylx_py.egg-info/SOURCES.txt'
+installing to build/bdist.linux-x86_64/wheel
+running install
+running install_lib
+creating build/bdist.linux-x86_64/wheel
+creating build/bdist.linux-x86_64/wheel/berylx
+creating build/bdist.linux-x86_64/wheel/berylx/darkcore
+copying build/lib/berylx/darkcore/__init__.py -> build/bdist.linux-x86_64/wheel/./berylx/darkcore
+copying build/lib/berylx/darkcore/io.py -> build/bdist.linux-x86_64/wheel/./berylx/darkcore
+copying build/lib/berylx/__init__.py -> build/bdist.linux-x86_64/wheel/./berylx
+copying build/lib/berylx/adapters.py -> build/bdist.linux-x86_64/wheel/./berylx
+copying build/lib/berylx/core.py -> build/bdist.linux-x86_64/wheel/./berylx
+copying build/lib/berylx/effect_tree.py -> build/bdist.linux-x86_64/wheel/./berylx
+copying build/lib/berylx/graph.py -> build/bdist.linux-x86_64/wheel/./berylx
+copying build/lib/berylx/merge.py -> build/bdist.linux-x86_64/wheel/./berylx
+copying build/lib/berylx/nodes.py -> build/bdist.linux-x86_64/wheel/./berylx
+copying build/lib/berylx/timeline.py -> build/bdist.linux-x86_64/wheel/./berylx
+copying build/lib/berylx/timeline_berylx.py -> build/bdist.linux-x86_64/wheel/./berylx
+running install_egg_info
+Copying src/berylx_py.egg-info to build/bdist.linux-x86_64/wheel/./berylx_py-0.1.0-py3.14.egg-info
+running install_scripts
+creating build/bdist.linux-x86_64/wheel/berylx_py-0.1.0.dist-info/WHEEL
+creating '/home/minamorl/repos/.worktrees/berylx-py-port/dist/.tmp-q50buqhn/berylx_py-0.1.0-py3-none-any.whl' and adding 'build/bdist.linux-x86_64/wheel' to it
+adding 'berylx/__init__.py'
+adding 'berylx/adapters.py'
+adding 'berylx/core.py'
+adding 'berylx/effect_tree.py'
+adding 'berylx/graph.py'
+adding 'berylx/merge.py'
+adding 'berylx/nodes.py'
+adding 'berylx/timeline.py'
+adding 'berylx/timeline_berylx.py'
+adding 'berylx/darkcore/__init__.py'
+adding 'berylx/darkcore/io.py'
+adding 'berylx_py-0.1.0.dist-info/licenses/LICENSE'
+adding 'berylx_py-0.1.0.dist-info/METADATA'
+adding 'berylx_py-0.1.0.dist-info/WHEEL'
+adding 'berylx_py-0.1.0.dist-info/top_level.txt'
+adding 'berylx_py-0.1.0.dist-info/RECORD'
+removing build/bdist.linux-x86_64/wheel
+Successfully built berylx_py-0.1.0.tar.gz and berylx_py-0.1.0-py3-none-any.whl
+
+$ .venv/bin/python -m twine check --strict dist/*
+exit: 0
+Checking dist/berylx_py-0.1.0-py3-none-any.whl: PASSED
+Checking dist/berylx_py-0.1.0.tar.gz: PASSED
+
+$ .venv/bin/python scripts/check_readme.py
+exit: 1
+Traceback (most recent call last):
+  File "/home/minamorl/repos/.worktrees/berylx-py-port/scripts/check_readme.py", line 9, in <module>
+    exec(compile(block, f"README.md:example{index}", "exec"), {})
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "README.md:example1", line 1, in <module>
+ModuleNotFoundError: No module named 'berylx'
+
+$ .venv/bin/python -m pip install --force-reinstall dist/berylx_py-0.1.0-py3-none-any.whl
+exit: 0
+Processing ./dist/berylx_py-0.1.0-py3-none-any.whl
+Installing collected packages: berylx-py
+Successfully installed berylx-py-0.1.0
+
+$ .venv/bin/python scripts/check_readme.py
+exit: 0
+3 README Python examples passed
+
+$ npx --yes prettier@3.6.2 --check README.md docs/**/*.md .github/**/*.yml tests/fixtures/*.json
+exit: 0
+Checking formatting...
+All matched files use Prettier code style!
+
+$ git diff --check
+exit: 0
+
+
+Version-trigger follow-up checks:
+$ extracted eligibility script against current pyproject.toml
+exit: 0
+berylx-py 0.1.0 is not published; proceeding through CI
+needed=true
+
+$ npx --yes prettier@3.6.2 --check README.md docs/**/*.md .github/**/*.yml tests/fixtures/*.json
+exit: 0
+Checking formatting...
+All matched files use Prettier code style!
+
+$ git diff --check
+exit: 0
+

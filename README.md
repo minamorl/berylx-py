@@ -7,7 +7,13 @@ port of [minamorl/berylx-ts](https://github.com/minamorl/berylx-ts), frozen at
 
 ## Install
 
-Python 3.11 or newer. From this source directory:
+Python 3.11 or newer. After the first PyPI release is published, install with:
+
+```bash
+python -m pip install berylx-py
+```
+
+Or install from this source directory:
 
 ```bash
 python -m pip install .
@@ -20,7 +26,7 @@ Install directly from GitHub:
 python -m pip install 'git+https://github.com/minamorl/berylx-py.git'
 ```
 
-No PyPI release is implied. For development from this source directory:
+For development from this source directory:
 
 ```bash
 python -m venv .venv
@@ -28,6 +34,16 @@ python -m venv .venv
 python -m pip install -r requirements-dev.txt
 python -m pip install -e .
 ```
+
+## Releasing
+
+Update `project.version` in `pyproject.toml`, then commit and push to `main`.
+The publishing workflow checks whether that version already exists on PyPI. A new
+version runs the complete Python 3.11–3.14 CI matrix, builds and checks the
+artifacts, then publishes through the registered Trusted Publisher. An existing
+version is skipped. PyPI or network errors fail the check instead of uploading.
+The workflow can also be dispatched manually from `main` to retry an unpublished
+version; no PyPI token needs to be stored in GitHub.
 
 ## Workflows
 

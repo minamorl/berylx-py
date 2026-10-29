@@ -12,6 +12,12 @@ license-files = ["LICENSE"]
 readme = "README.md"
 authors = [{name = "minamorl"}]
 
+[project.urls]
+Homepage = "https://github.com/minamorl/berylx-py"
+Repository = "https://github.com/minamorl/berylx-py"
+Issues = "https://github.com/minamorl/berylx-py/issues"
+Documentation = "https://github.com/minamorl/berylx-py#readme"
+
 [project.optional-dependencies]
 dev = ["pytest>=8", "hypothesis>=6", "build>=1", "ruff>=0.9", "mypy>=1"]
 

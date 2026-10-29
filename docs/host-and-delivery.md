@@ -34,8 +34,29 @@ login as `minamorl`, repository creation and `git push -u origin main` both exit
 The implementation commit is `45a1bc812f036abe4254073e0b42e995c780667a`.
 An unauthenticated GitHub API request confirmed `private: false` and `visibility: public`.
 Historical failure and successful delivery evidence are in `evidence/delivery.txt`.
-No PyPI credentials or publication have been used.
+No PyPI credentials or publication were used for the initial GitHub delivery.
 
 Bootstrap empty commit author email used an unverified numeric noreply prefix in error;
 the implementation commit uses the verified upstream author email.
 The empty commit is retained as history rather than rewritten.
+
+## PyPI publication follow-up
+
+The user subsequently requested PyPI authentication and confirmed registering the
+pending Trusted Publisher for `minamorl/berylx-py`, workflow `publish.yml`,
+environment `pypi`. This explicitly authorizes the PyPI publication follow-up;
+the original prohibition on assuming PyPI publication remains preserved in the
+historical request specification.
+
+The user then requested version upgrades to publish through CI. The
+`Publish to PyPI` workflow runs when `pyproject.toml` is pushed to `main`, or is
+manually dispatched from `main`. It checks the configured project version on PyPI:
+HTTP 200 skips an existing version, HTTP 404 proceeds, and other HTTP or network
+errors fail. New versions reuse the complete Python 3.11–3.14 CI matrix, then build
+and check wheel/sdist metadata. A separate
+job downloads those artifacts and obtains an OIDC token in environment `pypi`.
+Only that job has `id-token: write`; no stored PyPI API token is required.
+Pull requests do not publish. Publication success must be checked from the workflow result and the public PyPI project page.
+
+Primary source read for this configuration:
+[PyPI: Publishing with a Trusted Publisher](https://docs.pypi.org/trusted-publishers/using-a-publisher/).
