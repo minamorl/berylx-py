@@ -1,0 +1,57 @@
+command: .venv/bin/python -m pytest -q tests/test_boundaries.py
+exit: 1
+..........FFF                                                            [100%]
+=================================== FAILURES ===================================
+________________ test_error_nullish_context_and_empty_messages _________________
+
+    def test_error_nullish_context_and_empty_messages():
+        from berylx import BerylxError
+        error = BerylxError('bad', failed_node='first', trace=['first'])
+>       assert error.with_context(failed_node=None).failed_node == 'first'
+E       AssertionError: assert None == 'first'
+E        +  where None = BerylxError('bad').failed_node
+E        +    where BerylxError('bad') = with_context(failed_node=None)
+E        +      where with_context = BerylxError('bad').with_context
+
+tests/test_boundaries.py:213: AssertionError
+___________ test_external_mapping_proxy_is_not_assumed_deeply_frozen ___________
+
+    def test_external_mapping_proxy_is_not_assumed_deeply_frozen():
+        from types import MappingProxyType
+        original = {'items': [1]}
+        original['self'] = original
+        result = Focus.of(MappingProxyType(original))
+        original['items'].append(2)
+>       assert result.at('items').get() == [1]
+E       assert [1, 2] == [1]
+E         
+E         Left contains one more item: 2
+E         Use -v to get more diff
+
+tests/test_boundaries.py:224: AssertionError
+_____________ test_real_virtual_io_preserve_all_newline_sequences ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-paseo-a/pytest-5/test_real_virtual_io_preserve_0')
+
+    def test_real_virtual_io_preserve_all_newline_sequences(tmp_path):
+        path = str(tmp_path / 'lines')
+        text = 'first\r\nsecond\rthird\n'
+        program = d.IOEffects.write(path, text).seq(d.IOEffects.append(path, '\r\nlast')).seq(d.IOEffects.read(path))
+>       assert d.run(program, d.real_handlers()) == d.run(program, d.VirtualWorld().handlers()) == text + '\r\nlast'
+E       AssertionError: assert 'first\nsecond\nthird\n\nlast' == 'first\r\nsec...ird\n\r\nlast'
+E         
+E         - first
+E         ?      -
+E         + first
+E         - second
+E         ?       ^
+E         + second...
+E         
+E         ...Full output truncated, use '-vv' to show
+
+tests/test_boundaries.py:233: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_boundaries.py::test_error_nullish_context_and_empty_messages
+FAILED tests/test_boundaries.py::test_external_mapping_proxy_is_not_assumed_deeply_frozen
+FAILED tests/test_boundaries.py::test_real_virtual_io_preserve_all_newline_sequences
+3 failed, 10 passed in 0.23s

@@ -1,0 +1,112 @@
+{
+  "partial": {
+    "ok": false,
+    "state": {
+      "charged": true
+    },
+    "error": {
+      "code": "declined",
+      "message": "no",
+      "failedNode": "fail",
+      "trace": ["fail"],
+      "fatal": false,
+      "parallelErrors": [],
+      "metadata": {}
+    }
+  },
+  "caught": {
+    "ok": true,
+    "state": {
+      "charged": true,
+      "healed": "declined"
+    }
+  },
+  "strict": {
+    "ok": true,
+    "state": {
+      "a": 1,
+      "b": 2
+    }
+  },
+  "deep": {
+    "ok": true,
+    "state": {
+      "a": 0,
+      "b": 2
+    }
+  },
+  "conflict": {
+    "ok": false,
+    "state": {
+      "a": 0
+    },
+    "error": {
+      "code": "merge_conflict",
+      "message": "merge conflict at a",
+      "failedNode": "parallel",
+      "trace": ["parallel"],
+      "fatal": false,
+      "parallelErrors": [],
+      "metadata": {
+        "path": ["a"],
+        "left": 1,
+        "right": 2,
+        "base": 0
+      }
+    }
+  },
+  "accumulate": {
+    "ok": false,
+    "state": {},
+    "error": {
+      "code": "parallel_failed",
+      "message": "2 parallel branches failed",
+      "failedNode": "fail",
+      "trace": ["fail"],
+      "fatal": false,
+      "parallelErrors": [
+        {
+          "code": "declined",
+          "message": "no",
+          "failedNode": "fail",
+          "trace": ["fail"],
+          "fatal": false,
+          "parallelErrors": [],
+          "metadata": {}
+        },
+        {
+          "code": "other",
+          "message": "other",
+          "failedNode": "other",
+          "trace": ["other"],
+          "fatal": false,
+          "parallelErrors": [],
+          "metadata": {}
+        }
+      ],
+      "metadata": {}
+    }
+  },
+  "handlers": {
+    "ok": true,
+    "state": {
+      "v": 20,
+      "healed": true
+    }
+  },
+  "trace": [
+    "berylx_parallel",
+    "berylx_task",
+    "lookup",
+    "berylx_rescue",
+    "berylx_task",
+    "berylx_recover",
+    "berylx_task"
+  ],
+  "state": [22, 11],
+  "monads": {
+    "maybe": 4,
+    "result": "bad",
+    "validation": ["a", "b"]
+  }
+}

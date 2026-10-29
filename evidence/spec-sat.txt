@@ -1,0 +1,4 @@
+cwd: /tmp/berylx-py-spec-verify-oyo_j_il
+command: node ci/sat-check.mjs pins/domains/berylx-py.spec
+✓ pins/domains/berylx-py.spec SAT (108 pins, 106 keys)
+exit_code: 0

@@ -1,0 +1,20 @@
+command: .venv/bin/python -m pytest -q tests/test_boundaries.py
+exit: 1
+.............F                                                           [100%]
+=================================== FAILURES ===================================
+_________________ test_cray_missing_vs_explicit_none_fallbacks _________________
+
+    def test_cray_missing_vs_explicit_none_fallbacks():
+>       assert from_cray_result(Cray.failure('bad'), None).focus.get() == {}
+E       AssertionError: assert None == {}
+E        +  where None = get()
+E        +    where get = Focus(value=None, path=()).get
+E        +      where Focus(value=None, path=()) = Err(focus=Focus(value=None, path=()), error=BerylxError('bad')).focus
+E        +        where Err(focus=Focus(value=None, path=()), error=BerylxError('bad')) = from_cray_result(CrayFailure(error='bad'), None)
+E        +          where CrayFailure(error='bad') = <class 'berylx.adapters.CrayFailure'>('bad')
+E        +            where <class 'berylx.adapters.CrayFailure'> = Cray.failure
+
+tests/test_boundaries.py:247: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_boundaries.py::test_cray_missing_vs_explicit_none_fallbacks
+1 failed, 13 passed in 0.17s

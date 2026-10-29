@@ -1,0 +1,446 @@
+Independent frozen-source final validation
+
+cwd: /home/minamorl/repos/.worktrees/berylx-py-port
+command: sha256sum -c evidence/frozen-sha256.txt
+.github/workflows/ci.yml: OK
+.gitignore: OK
+LICENSE: OK
+MANIFEST.in: OK
+README.md: OK
+docs/api.md: OK
+docs/equivalence.md: OK
+docs/host-and-delivery.md: OK
+docs/source-audit.md: OK
+docs/spec/berylx-py.spec: OK
+docs/timeline.md: OK
+pyproject.toml: OK
+requirements-dev.txt: OK
+scripts/check_readme.py: OK
+scripts/ts_oracle.mjs: OK
+src/berylx/__init__.py: OK
+src/berylx/adapters.py: OK
+src/berylx/core.py: OK
+src/berylx/darkcore/__init__.py: OK
+src/berylx/darkcore/io.py: OK
+src/berylx/effect_tree.py: OK
+src/berylx/graph.py: OK
+src/berylx/merge.py: OK
+src/berylx/nodes.py: OK
+src/berylx/timeline.py: OK
+src/berylx/timeline_berylx.py: OK
+tests/fixtures/ts-observations.json: OK
+tests/test_boundaries.py: OK
+tests/test_darkcore.py: OK
+tests/test_oracle.py: OK
+tests/test_properties.py: OK
+tests/test_regression.py: OK
+tests/test_timeline.py: OK
+exit_code: 0
+
+cwd: /home/minamorl/repos/.worktrees/berylx-py-port
+command: /home/minamorl/repos/.worktrees/berylx-py-port/.venv/bin/python -m pytest -q tests/test_regression.py tests/test_darkcore.py tests/test_oracle.py tests/test_boundaries.py tests/test_timeline.py
+........................................................................ [100%]
+72 passed in 0.29s
+exit_code: 0
+
+cwd: /home/minamorl/repos/.worktrees/berylx-py-port
+command: /home/minamorl/repos/.worktrees/berylx-py-port/.venv/bin/python -m pytest -q tests/test_properties.py
+................                                                         [100%]
+16 passed in 1.39s
+exit_code: 0
+
+cwd: /home/minamorl/repos/.worktrees/berylx-py-port
+command: /home/minamorl/repos/.worktrees/berylx-py-port/.venv/bin/python -m pytest -q
+........................................................................ [ 81%]
+................                                                         [100%]
+88 passed in 1.60s
+exit_code: 0
+
+cwd: /home/minamorl/repos/.worktrees/berylx-py-port
+command: /home/minamorl/repos/.worktrees/berylx-py-port/.venv/bin/ruff check src tests scripts
+All checks passed!
+exit_code: 0
+
+cwd: /home/minamorl/repos/.worktrees/berylx-py-port
+command: /home/minamorl/repos/.worktrees/berylx-py-port/.venv/bin/ruff format --check src tests scripts
+18 files already formatted
+exit_code: 0
+
+cwd: /home/minamorl/repos/.worktrees/berylx-py-port
+command: /home/minamorl/repos/.worktrees/berylx-py-port/.venv/bin/python -m mypy src/berylx
+Success: no issues found in 11 source files
+exit_code: 0
+
+cwd: /tmp/berylx-independent-9jmlopco/source
+command: /home/minamorl/repos/.worktrees/berylx-py-port/.venv/bin/python -m build --outdir /tmp/berylx-independent-9jmlopco/dist
+* Creating isolated environment: venv+pip...
+* Installing packages in isolated environment:
+  - setuptools>=77
+* Getting build dependencies for sdist...
+running egg_info
+creating src/berylx_py.egg-info
+writing src/berylx_py.egg-info/PKG-INFO
+writing dependency_links to src/berylx_py.egg-info/dependency_links.txt
+writing requirements to src/berylx_py.egg-info/requires.txt
+writing top-level names to src/berylx_py.egg-info/top_level.txt
+writing manifest file 'src/berylx_py.egg-info/SOURCES.txt'
+reading manifest file 'src/berylx_py.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+warning: no files found matching '*.txt' under directory 'evidence'
+adding license file 'LICENSE'
+writing manifest file 'src/berylx_py.egg-info/SOURCES.txt'
+* Installed build dependency versions:
+  - setuptools==84.2.1
+* Building sdist...
+running sdist
+running egg_info
+writing src/berylx_py.egg-info/PKG-INFO
+writing dependency_links to src/berylx_py.egg-info/dependency_links.txt
+writing requirements to src/berylx_py.egg-info/requires.txt
+writing top-level names to src/berylx_py.egg-info/top_level.txt
+reading manifest file 'src/berylx_py.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+warning: no files found matching '*.txt' under directory 'evidence'
+adding license file 'LICENSE'
+writing manifest file 'src/berylx_py.egg-info/SOURCES.txt'
+running check
+creating berylx_py-0.1.0
+creating berylx_py-0.1.0/.github/workflows
+creating berylx_py-0.1.0/docs
+creating berylx_py-0.1.0/docs/spec
+creating berylx_py-0.1.0/scripts
+creating berylx_py-0.1.0/src/berylx
+creating berylx_py-0.1.0/src/berylx/darkcore
+creating berylx_py-0.1.0/src/berylx_py.egg-info
+creating berylx_py-0.1.0/tests
+creating berylx_py-0.1.0/tests/fixtures
+copying files to berylx_py-0.1.0...
+copying LICENSE -> berylx_py-0.1.0
+copying MANIFEST.in -> berylx_py-0.1.0
+copying README.md -> berylx_py-0.1.0
+copying pyproject.toml -> berylx_py-0.1.0
+copying requirements-dev.txt -> berylx_py-0.1.0
+copying .github/workflows/ci.yml -> berylx_py-0.1.0/.github/workflows
+copying docs/api.md -> berylx_py-0.1.0/docs
+copying docs/equivalence.md -> berylx_py-0.1.0/docs
+copying docs/host-and-delivery.md -> berylx_py-0.1.0/docs
+copying docs/source-audit.md -> berylx_py-0.1.0/docs
+copying docs/timeline.md -> berylx_py-0.1.0/docs
+copying docs/spec/berylx-py.spec -> berylx_py-0.1.0/docs/spec
+copying scripts/check_readme.py -> berylx_py-0.1.0/scripts
+copying scripts/ts_oracle.mjs -> berylx_py-0.1.0/scripts
+copying src/berylx/__init__.py -> berylx_py-0.1.0/src/berylx
+copying src/berylx/adapters.py -> berylx_py-0.1.0/src/berylx
+copying src/berylx/core.py -> berylx_py-0.1.0/src/berylx
+copying src/berylx/effect_tree.py -> berylx_py-0.1.0/src/berylx
+copying src/berylx/graph.py -> berylx_py-0.1.0/src/berylx
+copying src/berylx/merge.py -> berylx_py-0.1.0/src/berylx
+copying src/berylx/nodes.py -> berylx_py-0.1.0/src/berylx
+copying src/berylx/timeline.py -> berylx_py-0.1.0/src/berylx
+copying src/berylx/timeline_berylx.py -> berylx_py-0.1.0/src/berylx
+copying src/berylx/darkcore/__init__.py -> berylx_py-0.1.0/src/berylx/darkcore
+copying src/berylx/darkcore/io.py -> berylx_py-0.1.0/src/berylx/darkcore
+copying src/berylx_py.egg-info/PKG-INFO -> berylx_py-0.1.0/src/berylx_py.egg-info
+copying src/berylx_py.egg-info/SOURCES.txt -> berylx_py-0.1.0/src/berylx_py.egg-info
+copying src/berylx_py.egg-info/dependency_links.txt -> berylx_py-0.1.0/src/berylx_py.egg-info
+copying src/berylx_py.egg-info/requires.txt -> berylx_py-0.1.0/src/berylx_py.egg-info
+copying src/berylx_py.egg-info/top_level.txt -> berylx_py-0.1.0/src/berylx_py.egg-info
+copying tests/test_boundaries.py -> berylx_py-0.1.0/tests
+copying tests/test_darkcore.py -> berylx_py-0.1.0/tests
+copying tests/test_oracle.py -> berylx_py-0.1.0/tests
+copying tests/test_properties.py -> berylx_py-0.1.0/tests
+copying tests/test_regression.py -> berylx_py-0.1.0/tests
+copying tests/test_timeline.py -> berylx_py-0.1.0/tests
+copying tests/fixtures/ts-observations.json -> berylx_py-0.1.0/tests/fixtures
+Writing berylx_py-0.1.0/setup.cfg
+Creating tar archive
+removing 'berylx_py-0.1.0' (and everything under it)
+* Building wheel from sdist
+* Creating isolated environment: venv+pip...
+* Installing packages in isolated environment:
+  - setuptools>=77
+* Getting build dependencies for wheel...
+running egg_info
+writing src/berylx_py.egg-info/PKG-INFO
+writing dependency_links to src/berylx_py.egg-info/dependency_links.txt
+writing requirements to src/berylx_py.egg-info/requires.txt
+writing top-level names to src/berylx_py.egg-info/top_level.txt
+reading manifest file 'src/berylx_py.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+warning: no files found matching '*.txt' under directory 'evidence'
+adding license file 'LICENSE'
+writing manifest file 'src/berylx_py.egg-info/SOURCES.txt'
+* Installed build dependency versions:
+  - setuptools==84.2.1
+* Building wheel...
+running bdist_wheel
+running build
+running build_py
+creating build/lib/berylx
+copying src/berylx/timeline_berylx.py -> build/lib/berylx
+copying src/berylx/timeline.py -> build/lib/berylx
+copying src/berylx/nodes.py -> build/lib/berylx
+copying src/berylx/merge.py -> build/lib/berylx
+copying src/berylx/graph.py -> build/lib/berylx
+copying src/berylx/effect_tree.py -> build/lib/berylx
+copying src/berylx/core.py -> build/lib/berylx
+copying src/berylx/adapters.py -> build/lib/berylx
+copying src/berylx/__init__.py -> build/lib/berylx
+creating build/lib/berylx/darkcore
+copying src/berylx/darkcore/io.py -> build/lib/berylx/darkcore
+copying src/berylx/darkcore/__init__.py -> build/lib/berylx/darkcore
+running egg_info
+writing src/berylx_py.egg-info/PKG-INFO
+writing dependency_links to src/berylx_py.egg-info/dependency_links.txt
+writing requirements to src/berylx_py.egg-info/requires.txt
+writing top-level names to src/berylx_py.egg-info/top_level.txt
+reading manifest file 'src/berylx_py.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+warning: no files found matching '*.txt' under directory 'evidence'
+adding license file 'LICENSE'
+writing manifest file 'src/berylx_py.egg-info/SOURCES.txt'
+installing to build/bdist.linux-x86_64/wheel
+running install
+running install_lib
+creating build/bdist.linux-x86_64/wheel
+creating build/bdist.linux-x86_64/wheel/berylx
+creating build/bdist.linux-x86_64/wheel/berylx/darkcore
+copying build/lib/berylx/darkcore/__init__.py -> build/bdist.linux-x86_64/wheel/./berylx/darkcore
+copying build/lib/berylx/darkcore/io.py -> build/bdist.linux-x86_64/wheel/./berylx/darkcore
+copying build/lib/berylx/__init__.py -> build/bdist.linux-x86_64/wheel/./berylx
+copying build/lib/berylx/adapters.py -> build/bdist.linux-x86_64/wheel/./berylx
+copying build/lib/berylx/core.py -> build/bdist.linux-x86_64/wheel/./berylx
+copying build/lib/berylx/effect_tree.py -> build/bdist.linux-x86_64/wheel/./berylx
+copying build/lib/berylx/graph.py -> build/bdist.linux-x86_64/wheel/./berylx
+copying build/lib/berylx/merge.py -> build/bdist.linux-x86_64/wheel/./berylx
+copying build/lib/berylx/nodes.py -> build/bdist.linux-x86_64/wheel/./berylx
+copying build/lib/berylx/timeline.py -> build/bdist.linux-x86_64/wheel/./berylx
+copying build/lib/berylx/timeline_berylx.py -> build/bdist.linux-x86_64/wheel/./berylx
+running install_egg_info
+Copying src/berylx_py.egg-info to build/bdist.linux-x86_64/wheel/./berylx_py-0.1.0-py3.14.egg-info
+running install_scripts
+creating build/bdist.linux-x86_64/wheel/berylx_py-0.1.0.dist-info/WHEEL
+creating '/tmp/berylx-independent-9jmlopco/dist/.tmp-2kpcuc26/berylx_py-0.1.0-py3-none-any.whl' and adding 'build/bdist.linux-x86_64/wheel' to it
+adding 'berylx/__init__.py'
+adding 'berylx/adapters.py'
+adding 'berylx/core.py'
+adding 'berylx/effect_tree.py'
+adding 'berylx/graph.py'
+adding 'berylx/merge.py'
+adding 'berylx/nodes.py'
+adding 'berylx/timeline.py'
+adding 'berylx/timeline_berylx.py'
+adding 'berylx/darkcore/__init__.py'
+adding 'berylx/darkcore/io.py'
+adding 'berylx_py-0.1.0.dist-info/licenses/LICENSE'
+adding 'berylx_py-0.1.0.dist-info/METADATA'
+adding 'berylx_py-0.1.0.dist-info/WHEEL'
+adding 'berylx_py-0.1.0.dist-info/top_level.txt'
+adding 'berylx_py-0.1.0.dist-info/RECORD'
+removing build/bdist.linux-x86_64/wheel
+Successfully built berylx_py-0.1.0.tar.gz and berylx_py-0.1.0-py3-none-any.whl
+exit_code: 0
+
+cwd: /tmp/berylx-independent-9jmlopco
+command: /home/minamorl/repos/.worktrees/berylx-py-port/.venv/bin/python -m venv /tmp/berylx-independent-9jmlopco/wheel-env
+exit_code: 0
+
+cwd: /tmp/berylx-independent-9jmlopco
+command: /tmp/berylx-independent-9jmlopco/wheel-env/bin/python -m pip install --no-deps /tmp/berylx-independent-9jmlopco/dist/berylx_py-0.1.0-py3-none-any.whl
+Processing ./dist/berylx_py-0.1.0-py3-none-any.whl
+Installing collected packages: berylx-py
+Successfully installed berylx-py-0.1.0
+exit_code: 0
+
+cwd: /tmp/berylx-independent-9jmlopco
+command: /tmp/berylx-independent-9jmlopco/wheel-env/bin/python /home/minamorl/repos/.worktrees/berylx-py-port/scripts/check_readme.py
+3 README Python examples passed
+exit_code: 0
+
+cwd: /tmp/berylx-independent-9jmlopco
+command: /tmp/berylx-independent-9jmlopco/wheel-env/bin/python -c 'import berylx; print(berylx.__file__); assert "site-packages" in berylx.__file__'
+/tmp/berylx-independent-9jmlopco/wheel-env/lib/python3.14/site-packages/berylx/__init__.py
+exit_code: 0
+
+cwd: /home/minamorl/repos/.worktrees/berylx-py-port
+command: node scripts/ts_oracle.mjs /home/minamorl/repos/.worktrees/berylx-ts-24aabcd/dist/index.js
+{
+  "partial": {
+    "ok": false,
+    "state": {
+      "charged": true
+    },
+    "error": {
+      "code": "declined",
+      "message": "no",
+      "failedNode": "fail",
+      "trace": [
+        "fail"
+      ],
+      "fatal": false,
+      "parallelErrors": [],
+      "metadata": {}
+    }
+  },
+  "caught": {
+    "ok": true,
+    "state": {
+      "charged": true,
+      "healed": "declined"
+    }
+  },
+  "strict": {
+    "ok": true,
+    "state": {
+      "a": 1,
+      "b": 2
+    }
+  },
+  "deep": {
+    "ok": true,
+    "state": {
+      "a": 0,
+      "b": 2
+    }
+  },
+  "conflict": {
+    "ok": false,
+    "state": {
+      "a": 0
+    },
+    "error": {
+      "code": "merge_conflict",
+      "message": "merge conflict at a",
+      "failedNode": "parallel",
+      "trace": [
+        "parallel"
+      ],
+      "fatal": false,
+      "parallelErrors": [],
+      "metadata": {
+        "path": [
+          "a"
+        ],
+        "left": 1,
+        "right": 2,
+        "base": 0
+      }
+    }
+  },
+  "accumulate": {
+    "ok": false,
+    "state": {},
+    "error": {
+      "code": "parallel_failed",
+      "message": "2 parallel branches failed",
+      "failedNode": "fail",
+      "trace": [
+        "fail"
+      ],
+      "fatal": false,
+      "parallelErrors": [
+        {
+          "code": "declined",
+          "message": "no",
+          "failedNode": "fail",
+          "trace": [
+            "fail"
+          ],
+          "fatal": false,
+          "parallelErrors": [],
+          "metadata": {}
+        },
+        {
+          "code": "other",
+          "message": "other",
+          "failedNode": "other",
+          "trace": [
+            "other"
+          ],
+          "fatal": false,
+          "parallelErrors": [],
+          "metadata": {}
+        }
+      ],
+      "metadata": {}
+    }
+  },
+  "handlers": {
+    "ok": true,
+    "state": {
+      "v": 20,
+      "healed": true
+    }
+  },
+  "trace": [
+    "berylx_parallel",
+    "berylx_task",
+    "lookup",
+    "berylx_rescue",
+    "berylx_task",
+    "berylx_recover",
+    "berylx_task"
+  ],
+  "state": [
+    22,
+    11
+  ],
+  "monads": {
+    "maybe": 4,
+    "result": "bad",
+    "validation": [
+      "a",
+      "b"
+    ]
+  }
+}
+exit_code: 0
+
+Independent TS oracle JSON equals fixture: PASS
+
+cwd: /home/minamorl/repos/.worktrees/berylx-py-port
+command: sha256sum -c evidence/frozen-sha256.txt
+.github/workflows/ci.yml: OK
+.gitignore: OK
+LICENSE: OK
+MANIFEST.in: OK
+README.md: OK
+docs/api.md: OK
+docs/equivalence.md: OK
+docs/host-and-delivery.md: OK
+docs/source-audit.md: OK
+docs/spec/berylx-py.spec: OK
+docs/timeline.md: OK
+pyproject.toml: OK
+requirements-dev.txt: OK
+scripts/check_readme.py: OK
+scripts/ts_oracle.mjs: OK
+src/berylx/__init__.py: OK
+src/berylx/adapters.py: OK
+src/berylx/core.py: OK
+src/berylx/darkcore/__init__.py: OK
+src/berylx/darkcore/io.py: OK
+src/berylx/effect_tree.py: OK
+src/berylx/graph.py: OK
+src/berylx/merge.py: OK
+src/berylx/nodes.py: OK
+src/berylx/timeline.py: OK
+src/berylx/timeline_berylx.py: OK
+tests/fixtures/ts-observations.json: OK
+tests/test_boundaries.py: OK
+tests/test_darkcore.py: OK
+tests/test_oracle.py: OK
+tests/test_properties.py: OK
+tests/test_regression.py: OK
+tests/test_timeline.py: OK
+exit_code: 0
+
+Secret-pattern inspection (candidate tracked files; values never printed):
+PASS: no credential-pattern matches in 49 files
+Excluded artifacts present in tracked candidates: []
+command: git check-ignore .venv/example build/example dist/example src/berylx/__pycache__/example.pyc
+.venv/example
+build/example
+dist/example
+src/berylx/__pycache__/example.pyc
+exit_code: 0

@@ -1,0 +1,35 @@
+command: .venv/bin/python -m pytest -q tests/test_regression.py tests/test_darkcore.py tests/test_oracle.py
+exit: 2
+
+==================================== ERRORS ====================================
+__________________ ERROR collecting tests/test_regression.py ___________________
+ImportError while importing test module '/home/minamorl/repos/.worktrees/berylx-py-port/tests/test_regression.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_regression.py:4: in <module>
+    from berylx import (Focus, Root, Task, AsyncTask, Ok, Err, ResultOps, Flow, State,
+E   ImportError: cannot import name 'Focus' from 'berylx' (unknown location)
+___________________ ERROR collecting tests/test_darkcore.py ____________________
+tests/test_darkcore.py:6: in <module>
+    @pytest.mark.parametrize('success,failure', [(d.Just, d.Nothing()), (d.Right, d.Left('e')), (d.Ok, d.Err('e')), (d.Success, d.Failure(['e']))])
+                                                  ^^^^^^
+E   AttributeError: module 'berylx.darkcore' has no attribute 'Just'
+____________________ ERROR collecting tests/test_oracle.py _____________________
+ImportError while importing test module '/home/minamorl/repos/.worktrees/berylx-py-port/tests/test_oracle.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_oracle.py:4: in <module>
+    from berylx import Task, Catch, Merge, EffectTree, darkcore as d
+E   ImportError: cannot import name 'Task' from 'berylx' (unknown location)
+=========================== short test summary info ============================
+ERROR tests/test_regression.py
+ERROR tests/test_darkcore.py - AttributeError: module 'berylx.darkcore' has n...
+ERROR tests/test_oracle.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 3 errors during collection !!!!!!!!!!!!!!!!!!!!
+3 errors in 0.23s

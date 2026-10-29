@@ -1,0 +1,27 @@
+cwd: /tmp
+command: /tmp/berylx-wheel-smoke/bin/pip install --no-deps --force-reinstall /home/minamorl/repos/.worktrees/berylx-py-port/dist/berylx_py-0.1.0-py3-none-any.whl
+exit: 0
+Processing /home/minamorl/repos/.worktrees/berylx-py-port/dist/berylx_py-0.1.0-py3-none-any.whl
+Installing collected packages: berylx-py
+  Attempting uninstall: berylx-py
+    Found existing installation: berylx-py 0.1.0
+    Uninstalling berylx-py-0.1.0:
+      Successfully uninstalled berylx-py-0.1.0
+Successfully installed berylx-py-0.1.0
+
+
+cwd: /tmp
+command: /tmp/berylx-wheel-smoke/bin/python /home/minamorl/repos/.worktrees/berylx-py-port/scripts/check_readme.py
+exit: 0
+3 README Python examples passed
+
+
+cwd: /tmp
+command: /tmp/berylx-wheel-smoke/bin/python -c import berylx, importlib.metadata; assert berylx.VERSION == importlib.metadata.version("berylx-py"); print(berylx.__file__); print("installed version", berylx.VERSION)
+exit: 0
+/tmp/berylx-wheel-smoke/lib/python3.14/site-packages/berylx/__init__.py
+installed version 0.1.0
+
+
+artifact content checks: sdist oracle fixture, wheel Timeline and MIT license present
+exit: 0

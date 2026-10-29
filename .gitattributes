@@ -1,0 +1,2 @@
+# Preserve raw gate output, including pytest's significant diagnostic spacing.
+evidence/*.txt -whitespace

@@ -1,0 +1,22 @@
+// Usage: node scripts/ts_oracle.mjs /absolute/pinned/ts/dist/index.js
+import {pathToFileURL} from 'node:url';
+const b = await import(pathToFileURL(process.argv[2]));
+const {Task, Catch, Merge, EffectTree, Darkcore:d} = b;
+const put = (k,v) => Task.of(k, f => f.at(k).set(v));
+const fail = Task.of('fail', f => f.reject('declined', 'no'));
+const envelope = r => ({ok:r.isOk(), state:r.focus.toObject(), ...(r.isErr()?{error:r.error.toObject()}: {})});
+const observations = {};
+observations.partial = envelope(put('charged',true).then(fail).then(put('skipped',true)).call({}));
+observations.caught = envelope(put('charged',true).then(fail).then(Catch.of('heal',null,{},(e,f)=>f.at('healed').set(e.code))).call({}));
+const par = put('a',1).par(put('b',2));
+observations.strict = envelope(par.call({a:0,b:0}));
+observations.deep = envelope(par.reduce(Merge.deep()).call({a:0,b:0}));
+observations.conflict = envelope(put('a',1).par(put('a',2)).call({a:0}));
+observations.accumulate = envelope(fail.par(Task.of('other',f=>f.reject('other'))).accumulate().call({}));
+const trace = [];
+const effects = EffectTree.around({lookup:x=>x*10}, (tag,p,inner)=>{trace.push(tag);return inner(p)});
+observations.handlers = envelope(EffectTree.run(Task.of('lookup',(f,p)=>f.at('v').set(p.perform('lookup',2))).par(fail.rescueWith(put('healed',true))),{},effects));
+observations.trace = trace;
+observations.state = d.State.get().bind(n=>d.State.put(n+1).seq(d.State.get())).fmap(n=>n*2).run(10);
+observations.monads = {maybe:d.Maybe.just(3).bind(x=>d.Maybe.just(x+1)).value, result:d.Result.err('bad').bind(x=>d.Result.ok(x)).error, validation:d.Validation.failure('a').ap(d.Validation.failure('b')).errors};
+console.log(JSON.stringify(observations,null,2));
