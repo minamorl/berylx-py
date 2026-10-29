@@ -24,29 +24,18 @@ different contracts and emphasized result namespace separation, Validation bind 
 accumulating ap, and partial-state retention. Scouts are review, not execution proof;
 initial package absence was the expected tests-first state, not an implementation bug.
 
-## Delivery status: BLOCKED on GitHub authentication
+## Delivery status: published
 
-Authorized intended destination: https://github.com/minamorl/berylx-py .
-Public delivery is not complete, and no public repository URL has been verified.
-The target's connector `get_repo` returned 404 on recheck, meaning not found or
-access-visible; name availability was not confirmed. The connector is authenticated
-as `minamorl` but exposes no repository-creation operation.
+Public repository: https://github.com/minamorl/berylx-py .
 
-The current process user is `paseo-a`; its GitHub CLI authentication is absent.
-After independent final GREEN verification, the supervisor attempted:
-
-```bash
-gh repo create minamorl/berylx-py --public --source /home/minamorl/repos/berylx-py --remote origin
-```
-
-From `/home/minamorl/repos/berylx-py`, this exited **4** and requested `gh auth login`
-or a `GH_TOKEN`. Full command, exit and output are in `evidence/delivery.txt`.
-No successful create/push or public-read verification is claimed. Local source and
-wheel installation remain usable. No PyPI credentials or publication have been used.
-
-The supervisor owns the remaining commit/push/public-read delivery steps once
-GitHub authentication or an appropriately accessible repository is available.
+The initial create attempt failed with exit 4 because the current process user,
+`paseo-a`, had no GitHub CLI authentication. After the user completed GitHub device
+login as `minamorl`, repository creation and `git push -u origin main` both exited 0.
+The implementation commit is `45a1bc812f036abe4254073e0b42e995c780667a`.
+An unauthenticated GitHub API request confirmed `private: false` and `visibility: public`.
+Historical failure and successful delivery evidence are in `evidence/delivery.txt`.
+No PyPI credentials or publication have been used.
 
 Bootstrap empty commit author email used an unverified numeric noreply prefix in error;
-parent will use the verified upstream author email for the final implementation commit.
+the implementation commit uses the verified upstream author email.
 The empty commit is retained as history rather than rewritten.

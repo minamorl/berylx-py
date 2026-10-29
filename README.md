@@ -13,9 +13,8 @@ Python 3.11 or newer. From this source directory:
 python -m pip install .
 ```
 
-The intended public destination is https://github.com/minamorl/berylx-py .
-GitHub publication is currently blocked by missing CLI authentication; public
-repository access has not been verified. After publication, installation will be:
+The public repository is https://github.com/minamorl/berylx-py .
+Install directly from GitHub:
 
 ```bash
 python -m pip install 'git+https://github.com/minamorl/berylx-py.git'
