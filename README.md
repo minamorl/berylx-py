@@ -7,7 +7,7 @@ port of [minamorl/berylx-ts](https://github.com/minamorl/berylx-ts), frozen at
 
 ## Install
 
-Python 3.11 or newer. After the first PyPI release is published, install with:
+Python 3.11 or newer. Install from [PyPI](https://pypi.org/project/berylx-py/):
 
 ```bash
 python -m pip install berylx-py

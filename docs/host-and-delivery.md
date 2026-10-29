@@ -60,3 +60,17 @@ Pull requests do not publish. Publication success must be checked from the workf
 
 Primary source read for this configuration:
 [PyPI: Publishing with a Trusted Publisher](https://docs.pypi.org/trusted-publishers/using-a-publisher/).
+
+### PyPI release completed
+
+Version [0.1.0 is published on PyPI](https://pypi.org/project/berylx-py/0.1.0/).
+The version-triggered [publication run](https://github.com/minamorl/berylx-py/actions/runs/40872092643)
+completed successfully for commit `f37c7cd526963cbdfd4270b6be40cc3e3b906c81`.
+All seven jobs passed: eligibility, four Python CI versions, build, and publish.
+Independent public metadata and a fresh virtual environment installation from
+PyPI are recorded in `evidence/pypi-delivery.txt`, including all three README
+examples executed outside the source checkout.
+
+A [repeat dispatch of the same version](https://github.com/minamorl/berylx-py/actions/runs/40872356584)
+also succeeded: eligibility recognized the existing release and skipped
+validation, build, and publication without uploading again.
