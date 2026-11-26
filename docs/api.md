@@ -1,5 +1,20 @@
 # API correspondence and deliberate boundaries
 
+## Parallel worker limits
+
+`a.par(b, workers=2)` and `a.par(b).workers(2)` limit concurrent branches in
+asynchronous execution. The limit must be an integer of at least 1. The default
+has no limit. Every branch sees the same initial snapshot and settles; results and
+errors are folded in definition order. A limited parallel node remains nested when
+composed into another parallel node. Each level has an independent limit, so
+concurrency can multiply across levels; there is no shared global pool.
+Each nested node applies its own reducer and error policy before the parent combines
+its branch results; the parent sees a nested node as one branch.
+
+Synchronous branches still run sequentially. No thread or process pool is created;
+limits are intended for wait-heavy async work. Because of the GIL, threads do not
+speed up pure Python computation.
+
 | TypeScript surface                                      | Python surface                           | Contract                                                 |
 | ------------------------------------------------------- | ---------------------------------------- | -------------------------------------------------------- |
 | Focus / Lay                                             | Focus / Lay                              | immutable snapshot and lazy path operations              |
@@ -75,5 +90,5 @@
   modulo, empty sequences and zero divisors use Python behavior. OS error types,
   console rendering and shell behavior are platform-specific. No external IO occurs
   merely by constructing an IOEffects tree.
-- Python package version starts at 0.1.0 independently of TS 0.4.0. No PyPI artifact,
-  browser bundle, Node module shim, or TypeScript compile-time fixture parity claimed.
+- Python package version is independent of TS releases. No browser bundle,
+  Node module shim, or TypeScript compile-time fixture parity claimed.

@@ -72,6 +72,19 @@ right-biased two-way merging. `.accumulate()` collects failures. The default
 `short_circuit` selects the first failure **after every branch settles**; it does
 not cancel work. `AsyncTask` runs with `await EffectTree.run_async(...)`.
 
+Use `a.par(b, workers=2)` or `a.par(b).workers(2)` to limit concurrently
+running branches of that parallel node. The value must be an integer of at least 1.
+Without a limit, asynchronous branches all start concurrently. All branches
+start from the same snapshot and settle before results are combined in definition
+order, even after a failure. Each nested limited parallel node keeps its own limit;
+limits multiply across levels, rather than sharing one global pool.
+Each nested node applies its own reducer and error policy before its parent combines
+the resulting branch.
+
+Synchronous execution remains sequential regardless of `workers`. No thread or
+process pool is created: the limit is useful for asynchronous, wait-heavy work;
+the GIL means threads would not speed up pure Python computation.
+
 ## Monads and effect interpretation
 
 ```python

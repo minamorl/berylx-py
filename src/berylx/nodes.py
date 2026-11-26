@@ -11,6 +11,7 @@ from .darkcore import await_maybe
 from .merge import Merge
 
 S = TypeVar("S")
+_UNSET = object()
 
 
 def arity(block):
@@ -48,8 +49,8 @@ class Node(Generic[S]):
     pipe = then
     __rshift__ = then
 
-    def par(self, other):
-        return Parallel([self, other])
+    def par(self, other, *, workers=_UNSET):
+        return Parallel([self, other], workers=workers)
 
     __and__ = par
 
@@ -139,27 +140,47 @@ class Sequence(Node[S]):
 
 class Parallel(Node[S]):
     branches: tuple[Node, ...]
+    _workers = None
 
-    def __init__(self, branches, reducer=None, on_err="short_circuit"):
+    def __init__(self, branches, reducer=None, on_err="short_circuit", *, workers=_UNSET):
+        if workers is _UNSET:
+            self._workers = None
+        else:
+            if isinstance(workers, bool) or not isinstance(workers, int):
+                raise TypeError("workers must be an integer")
+            if workers < 1:
+                raise ValueError("workers must be at least 1")
+            self._workers = workers
         self.branches = tuple(
             child
             for branch in branches
-            for child in (branch.branches if isinstance(branch, Parallel) else [branch])
+            for child in (
+                branch.branches
+                if isinstance(branch, Parallel) and branch._workers is None
+                else [branch]
+            )
         )
         self.reducer = reducer if reducer is not None else Merge.strict()
         self.on_err = on_err
 
-    def par(self, other):
-        return Parallel([*self.branches, other], self.reducer, self.on_err)
+    def par(self, other, *, workers=_UNSET):
+        branches = [*self.branches, other] if self._workers is None else [self, other]
+        return Parallel(branches, self.reducer, self.on_err, workers=workers)
+
+    def workers(self, count):
+        return Parallel(self.branches, self.reducer, self.on_err, workers=count)
+
+    def _worker_arg(self):
+        return _UNSET if self._workers is None else self._workers
 
     def reduce(self, reducer):
-        return Parallel(self.branches, reducer, self.on_err)
+        return Parallel(self.branches, reducer, self.on_err, workers=self._worker_arg())
 
     def accumulate(self):
-        return Parallel(self.branches, self.reducer, "accumulate")
+        return Parallel(self.branches, self.reducer, "accumulate", workers=self._worker_arg())
 
     def short_circuit(self):
-        return Parallel(self.branches, self.reducer, "short_circuit")
+        return Parallel(self.branches, self.reducer, "short_circuit", workers=self._worker_arg())
 
     def nodes(self):
         return [leaf for branch in self.branches for leaf in branch.nodes()]
@@ -277,8 +298,9 @@ class Workflow(Node[S]):
     def then(self, other):
         return self.body.then(other)
 
-    def par(self, other):
-        return self.body.par(other)
+    def par(self, other, *, workers=_UNSET):
+        result = self.body.par(other)
+        return result if workers is _UNSET else result.workers(workers)
 
     def rescue_with(self, *args, **kwargs):
         return self.body.rescue_with(*args, **kwargs)

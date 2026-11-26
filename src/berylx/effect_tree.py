@@ -207,8 +207,16 @@ def async_real_handlers(effects=None, subtree=None):
                 return await node.call_async(value, Perform(current))
             return node.call(value, Perform(current))
         if tag == PARALLEL:
+            semaphore = asyncio.Semaphore(node._workers) if node._workers is not None else None
+
+            async def run_branch(child):
+                if semaphore is None:
+                    return await run_async(child, value, current)
+                async with semaphore:
+                    return await run_async(child, value, current)
+
             results = await asyncio.gather(
-                *(run_async(child, value, current) for child in node.branches),
+                *(run_branch(child) for child in node.branches),
                 return_exceptions=True,
             )
             for result in results:
