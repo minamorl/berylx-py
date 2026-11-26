@@ -49,7 +49,7 @@ from .timeline_berylx import (
     wait_for_human_login,
 )
 
-VERSION = __version__ = "0.1.0"
+VERSION = __version__ = "0.2.0"
 Darkcore = darkcore
 run = EffectTree.run
 task = Task.of
