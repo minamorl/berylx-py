@@ -101,6 +101,19 @@ def test_sync_remains_sequential():
     assert order == ["a", "b"]
 
 
+def test_legacy_parallel_without_workers_attribute():
+    a = Task("a", lambda f: f.put("a", 1))
+    b = Task("b", lambda f: f.put("b", 2))
+    node = a.par(b)
+    del node._workers
+    assert asyncio.run(EffectTree.run_async(node, {})).focus.to_object() == {"a": 1, "b": 2}
+    assert node.par(Task("c", lambda f: f.put("c", 3))).call({}).focus.to_object() == {
+        "a": 1,
+        "b": 2,
+        "c": 3,
+    }
+
+
 def test_workflow_preserves_existing_par_override():
     class CustomTask(Task):
         def par(self, other):
@@ -118,23 +131,29 @@ def test_workflow_preserves_existing_par_override():
 def test_workflow_workers_limits_override_branches():
     async def exercise():
         active = maximum = 0
+        executed = []
 
-        async def run(focus):
-            nonlocal active, maximum
-            active += 1
-            maximum = max(maximum, active)
-            await asyncio.sleep(0.01)
-            active -= 1
-            return focus
+        def branch(name):
+            async def run(focus):
+                nonlocal active, maximum
+                executed.append(name)
+                active += 1
+                maximum = max(maximum, active)
+                await asyncio.sleep(0.01)
+                active -= 1
+                return focus
+
+            return run
 
         class CustomTask(AsyncTask):
             def par(self, other):
-                return super().par(other).par(AsyncTask("third", run))
+                return super().par(other).par(AsyncTask("third", branch("third")))
 
-        node = Workflow("workflow", CustomTask("first", run)).par(
-            AsyncTask("second", run), workers=1
+        node = Workflow("workflow", CustomTask("first", branch("first"))).par(
+            AsyncTask("second", branch("second")), workers=1
         )
         await EffectTree.run_async(node, {})
         assert maximum == 1
+        assert executed == ["first", "second", "third"]
 
     asyncio.run(exercise())

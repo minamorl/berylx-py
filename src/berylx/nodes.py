@@ -140,6 +140,7 @@ class Sequence(Node[S]):
 
 class Parallel(Node[S]):
     branches: tuple[Node, ...]
+    _workers = None
 
     def __init__(self, branches, reducer=None, on_err="short_circuit", *, workers=_UNSET):
         if workers is _UNSET:
