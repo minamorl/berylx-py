@@ -30,8 +30,10 @@ with behavior lifted into this document and executable tests, not a Ruby spec ed
 - Sequence flattens and short-circuits until a matching Catch. Catch ignores success
   and excludes fatal errors unless opted in. Rescue recovers all Err; failed recovery
   retains original error in metadata.rescuedError. Predicate exceptions escape.
-- Parallel flattens; all branches use one base. Sync runs every branch in declaration
-  order, even with short_circuit. Async starts every branch and waits for settlement.
+- Unlimited Parallel nodes flatten; limited nodes remain independent branches. All
+  branches use one base per node. Sync runs every branch in declaration order, even
+  with short_circuit. Async starts all branches immediately by default; a worker
+  limit delays starts, and execution waits for settlement.
   First thrown rejection in declaration order escapes. short_circuit selects first Err
   after completion; accumulate preserves ordered child errors and first partial focus.
 - Strict merge is a three-way recursive object join, preserves disjoint existing-key
